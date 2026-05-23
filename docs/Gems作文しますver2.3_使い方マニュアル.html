@@ -1,0 +1,1008 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gems「作文します ver.2.3」使い方マニュアル</title>
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --paper: #ffffff;
+      --ink: #071b5f;
+      --muted: #4b5570;
+      --line: #dbe1ef;
+      --nav: #071b5f;
+      --accent: #ff4b4b;
+      --accent-2: #071b5f;
+      --accent-3: #ff6a5c;
+      --accent-soft: #fff1f1;
+      --blue-soft: #eef3ff;
+      --code-bg: #071b5f;
+      --code-ink: #f7fbff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: "Yu Gothic", "YuGothic", "Meiryo", system-ui, sans-serif;
+      line-height: 1.75;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 16px 16px, rgba(255, 75, 75, 0.12) 2px, transparent 2px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(to bottom, #000 0%, transparent 55%);
+    }
+    .hero {
+      position: relative;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 28px 24px 0;
+    }
+    .hero-inner {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      border: 3px solid var(--nav);
+      border-radius: 18px;
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 0 18px 0 rgba(7, 27, 95, 0.09);
+    }
+    .hero-copy {
+      padding: 30px 38px 34px;
+      text-align: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 14px;
+      padding: 4px 16px;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--nav);
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0;
+      border-top: 4px dotted var(--accent);
+      border-bottom: 4px dotted var(--accent);
+    }
+    .hero h1 {
+      margin: 0;
+      max-width: none;
+      font-size: clamp(2.35rem, 6vw, 5.6rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+      font-weight: 900;
+    }
+    .hero h1::first-letter {
+      color: var(--accent);
+    }
+    .hero-lead {
+      max-width: 900px;
+      margin: 18px auto 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      font-weight: 700;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      justify-content: center;
+    }
+    .hero-actions a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 8px 16px;
+      border: 2px solid var(--accent);
+      border-radius: 999px;
+      color: #fff;
+      background: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+    .hero-actions a:first-child {
+      color: #fff;
+      background: var(--nav);
+      border-color: var(--nav);
+    }
+    .hero-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      margin: 0 26px 26px;
+      padding: 18px 22px;
+      border: 2px solid var(--nav);
+      border-radius: 14px;
+      background: var(--blue-soft);
+      color: var(--ink);
+      text-align: left;
+    }
+    .hero-panel strong {
+      display: block;
+      font-size: 1.25rem;
+      line-height: 1.35;
+    }
+    .hero-panel span {
+      display: block;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .quick-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 4px;
+      min-width: 260px;
+    }
+    .quick-metrics div {
+      padding: 10px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.35;
+    }
+    .page {
+      display: grid;
+      grid-template-columns: minmax(230px, 292px) minmax(0, 1fr);
+      gap: 22px;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px 24px 64px;
+      position: relative;
+    }
+    aside {
+      position: sticky;
+      top: 20px;
+      align-self: start;
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+      padding: 16px;
+      border: 3px solid var(--nav);
+      border-radius: 14px;
+      background: var(--nav);
+      color: #fff;
+      box-shadow: 0 10px 0 rgba(7, 27, 95, 0.12);
+    }
+    aside h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      color: #fff;
+      text-align: center;
+      border-bottom: 4px dotted var(--accent);
+      padding-bottom: 10px;
+    }
+    aside a {
+      display: block;
+      margin: 3px 0;
+      padding: 7px 9px;
+      border-radius: 8px;
+      color: #d9e7ec;
+      text-decoration: none;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+    aside a:hover {
+      color: #202124;
+      background: #fff;
+    }
+    .toc-level-1 { font-weight: 700; color: #fff; }
+    .toc-level-2 { padding-left: 16px; }
+    main {
+      min-width: 0;
+      padding: 4px 0 30px;
+      counter-reset: chapter;
+    }
+    main > * {
+      max-width: 860px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    main > h2,
+    main > h2 + p,
+    main > h2 + p + p {
+      max-width: 940px;
+    }
+    .meta {
+      max-width: 940px;
+      margin: 0 auto 14px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: right;
+    }
+    main h1 {
+      display: none;
+    }
+    main > h2 {
+      counter-increment: chapter;
+      position: relative;
+      margin: 26px auto 18px;
+      padding: 20px 24px 20px 84px;
+      border: 3px solid var(--nav);
+      border-radius: 14px;
+      background: var(--paper);
+      box-shadow: 0 8px 0 rgba(7, 27, 95, 0.08);
+      font-size: clamp(1.35rem, 2vw, 1.75rem);
+      line-height: 1.45;
+    }
+    main > h2::before {
+      content: counter(chapter, decimal-leading-zero);
+      position: absolute;
+      left: 22px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    main > h2:nth-of-type(3n + 1)::before { background: var(--accent); }
+    main > h2:nth-of-type(3n + 2)::before { background: var(--nav); }
+    main h3 {
+      margin: 30px auto 12px;
+      padding: 10px 14px;
+      border-left: 7px solid var(--accent);
+      border-radius: 8px;
+      background: var(--accent-soft);
+      font-size: 1.14rem;
+    }
+    main h4 {
+      margin: 24px auto 8px;
+      color: var(--nav);
+      font-size: 1.03rem;
+    }
+    p { margin: 0 0 16px; }
+    ul {
+      margin: 0 0 18px;
+      padding: 0;
+      list-style: none;
+    }
+    li {
+      position: relative;
+      margin: 7px 0;
+      padding-left: 24px;
+    }
+    li::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 0.82em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    code {
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+      background: #edf1f5;
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 0.94em;
+    }
+    pre {
+      position: relative;
+      max-width: 940px;
+      margin: 18px auto 26px;
+      padding: 44px 20px 20px;
+      overflow: auto;
+      border: 1px solid #2d3a47;
+      border-radius: 14px;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      line-height: 1.7;
+      white-space: pre-wrap;
+      box-shadow: 0 8px 0 rgba(7, 27, 95, 0.16);
+    }
+    pre::before {
+      content: "そのまま使えるプロンプト";
+      position: absolute;
+      left: 16px;
+      top: 12px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+    pre code {
+      padding: 0;
+      background: transparent;
+      color: inherit;
+      font-size: 0.94rem;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      max-width: 940px;
+      margin: 18px auto 24px;
+      border: 3px solid var(--nav);
+      border-radius: 14px;
+      box-shadow: 0 8px 0 rgba(7, 27, 95, 0.08);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 540px;
+      background: #fff;
+    }
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--nav);
+      color: #fff;
+      font-weight: 700;
+    }
+    tr:last-child td { border-bottom: 0; }
+    tr:nth-child(even) td { background: var(--blue-soft); }
+    @media (max-width: 880px) {
+      .hero {
+        padding: 16px 16px 0;
+      }
+      .hero-inner {
+        display: block;
+        border-radius: 16px;
+      }
+      .hero-copy {
+        padding: 26px 22px;
+      }
+      .hero-panel {
+        display: block;
+        padding: 22px;
+        margin: 0 16px 18px;
+      }
+      .quick-metrics {
+        grid-template-columns: 1fr;
+      }
+      .page {
+        display: block;
+        padding: 16px;
+      }
+      aside {
+        position: static;
+        max-height: none;
+        margin-bottom: 16px;
+      }
+      main {
+        padding: 4px 0 40px;
+      }
+      .meta {
+        text-align: left;
+      }
+      main > h2 {
+        padding: 18px 18px 18px 70px;
+      }
+      main > h2::before {
+        left: 16px;
+        width: 38px;
+        height: 38px;
+      }
+    }
+    @media print {
+      body { background: #fff; }
+      body::before, .hero { display: none; }
+      .page { display: block; max-width: none; padding: 0; }
+      aside { display: none; }
+      main {
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+      }
+      h2 { break-after: avoid; }
+      pre, table { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">初心者が3分で試せる学校文書AIガイド</p>
+        <h1>Gems「作文します ver.2.3」使い方マニュアル</h1>
+        <p class="hero-lead">通信文、校務文書、レポート、素材整理、Web調査まで。まず試して、少しずつ自分の仕事に合わせて育てるための実用マニュアルです。</p>
+        <div class="hero-actions">
+          <a href="#section-2">まず使ってみる</a>
+          <a href="#section-14">マルチモジュールを見る</a>
+          <a href="#section-72">カスタム版の作り方</a>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <strong>読む前に、まず1回。</strong>
+        <span>完璧な指示はいりません。下書き、不明点、確認事項まで一緒に出す使い方から始められます。</span>
+        <div class="quick-metrics">
+          <div>3分<br>お試し</div>
+          <div>17章<br>実務型</div>
+          <div>コピペ<br>例つき</div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="page">
+    <aside>
+      <h2>目次</h2>
+      <a class="toc-level-1" href="#section-1">Gems「作文します ver.2.3」使い方マニュアル</a>
+<a class="toc-level-2" href="#section-2">0. まず3分だけ使ってみる</a>
+<a class="toc-level-2" href="#section-8">1. このGemでできること</a>
+<a class="toc-level-2" href="#section-9">2. はじめに知っておくこと</a>
+<a class="toc-level-2" href="#section-10">3. 基本の使い方</a>
+<a class="toc-level-2" href="#section-14">4. マルチモジュールで使う</a>
+<a class="toc-level-2" href="#section-23">5. 通信文を作る</a>
+<a class="toc-level-2" href="#section-27">6. 校務文書を作る</a>
+<a class="toc-level-2" href="#section-30">7. レポートを作る</a>
+<a class="toc-level-2" href="#section-33">8. 写真・PDF・メモを整理する</a>
+<a class="toc-level-2" href="#section-36">9. Web調査を使う</a>
+<a class="toc-level-2" href="#section-39">10. 文体を整える</a>
+<a class="toc-level-2" href="#section-42">11. よく使う頼み方テンプレート</a>
+<a class="toc-level-2" href="#section-48">12. うまくいかないときの直し方</a>
+<a class="toc-level-2" href="#section-55">13. 個人情報の扱い</a>
+<a class="toc-level-2" href="#section-56">14. 仕上げ前チェックリスト</a>
+<a class="toc-level-2" href="#section-57">15. 初心者向けの一番簡単な使い方</a>
+<a class="toc-level-2" href="#section-58">16. 慣れてきた人向けの裏技</a>
+<a class="toc-level-2" href="#section-72">17. 秘技：カスタム版「作文します」を作る</a>
+    </aside>
+    <main>
+      <p class="meta">HTML版生成日：2026年5月23日</p>
+      
+<h2 id="section-2">0. まず3分だけ使ってみる</h2>
+<p>このマニュアルを全部読む前に、まず1回だけ試してみましょう。</p>
+<p>最初は、うまい指示を書こうとしなくて大丈夫です。次のどれかをそのままGemに入れてください。</p>
+<h3 id="section-3">まず試すならこの3つ</h3>
+<h4 id="section-4">学級通信を作りたいとき</h4>
+<pre><code>学級通信に載せる短い文章を作ってください。
+
+内容：
+今日、子どもたちはグループで話し合いをしました。
+友達の意見を聞いて、自分の考えをノートに書き足していました。
+
+保護者に伝えたいこと：
+話し合いを通して、友達の考えを聞きながら学んでいる様子を伝えたいです。
+
+足りない情報は推測せず、〔未記入〕で残してください。</code></pre>
+<h4 id="section-5">保護者向けのお知らせを作りたいとき</h4>
+<pre><code>保護者向けのお知らせ文を作ってください。
+
+内容：授業参観のお知らせ
+日時：〔未記入〕
+場所：各教室
+対象：保護者
+お願い：写真撮影は控えてください
+
+足りない情報は〔未記入〕で残してください。</code></pre>
+<h4 id="section-6">文章を直したいとき</h4>
+<pre><code>次の文章を、保護者向けに分かりやすく整えてください。
+内容は変えず、やわらかい文体にしてください。
+
+本文：
+（ここに直したい文章を貼る）</code></pre>
+<h3 id="section-7">最初のゴール</h3>
+<p>最初から完璧な文章を作る必要はありません。</p>
+<p>まずは、次のどれかができれば成功です。</p>
+<ul><li>文章のたたき台ができた</li><li>足りない情報が分かった</li><li>かたい文章が少し読みやすくなった</li><li>自分では書き出せなかった1文目ができた</li></ul>
+<p>Gemは、最初から完成品を出すためだけの道具ではありません。</p>
+<p>「とりあえず下書きを出す」「足りないところを見つける」「言い方を整える」という使い方でも十分役に立ちます。</p>
+<h2 id="section-8">1. このGemでできること</h2>
+<p>「作文します ver.2.3」は、学校で使う文章づくりを助けるためのGemです。</p>
+<p>たとえば、次のような文章を作れます。</p>
+<ul><li>学級通信、学年通信、学校通信</li><li>保護者向けの案内文、お願い文、通知文</li><li>校内向けの依頼文、報告文、会議資料のたたき台</li><li>実践報告、研修レポート、振り返り文</li><li>すでにある文章の文体調整</li><li>写真、メモ、箇条書き、PDFなどの素材整理</li><li>Webで調べた情報をもとにした根拠整理</li></ul>
+<p>このGemの特徴は、文章をいきなりそれらしく作るのではなく、先に「何のために書くのか」「誰に届けるのか」「分かっている事実は何か」「まだ不明なことは何か」を整理してから文章にすることです。</p>
+<p>そのため、学校文書で起きやすい次のような失敗を減らせます。</p>
+<ul><li>事実ではないことを、それらしく書いてしまう</li><li>子どもの気持ちや成長を、根拠なく断定してしまう</li><li>期日、対象、提出先などが抜けてしまう</li><li>保護者や教職員が責められているように読める</li><li>個人情報や識別情報が残ってしまう</li><li>文章はきれいだが、読み手が何をすればよいか分からない</li></ul>
+<h2 id="section-9">2. はじめに知っておくこと</h2>
+<p>このGemでは、利用者が「通信文Mを使って」「校務文書Mを使って」のように指定する必要はありません。</p>
+<p>ふつうに、作りたいものをそのまま頼めば大丈夫です。</p>
+<p>例：</p>
+<pre><code>6年生の学年通信に載せる文章を作ってください。
+修学旅行の事前学習について、保護者に伝えたいです。</code></pre>
+<pre><code>保護者向けに、個人面談の日程希望票の提出をお願いする文書を作ってください。
+締切は6月10日です。</code></pre>
+<p>Gemの中では、入口役のHUBが依頼内容を見て、必要な知識だけを参照します。</p>
+<h2 id="section-10">3. 基本の使い方</h2>
+<h3 id="section-11">まずは、作りたいものをそのまま言う</h3>
+<p>最初から完璧な指示を書く必要はありません。</p>
+<p>特に初心者のうちは、次のように頼むのがおすすめです。</p>
+<pre><code>うまく指示できていないかもしれません。
+分かる範囲で下書きを作り、足りない情報だけ教えてください。</code></pre>
+<p>この一文を入れておくと、情報が足りないときでもGemが止まりにくくなります。</p>
+<p>次の4つが分かると、かなり作りやすくなります。</p>
+<div class="table-wrap"><table><thead><tr><th>入れるとよい情報</th><th>例</th></tr></thead><tbody><tr><td>何を作るか</td><td>学級通信、案内文、依頼文、レポート</td></tr><tr><td>誰に向けるか</td><td>保護者、児童、教職員、管理職、地域</td></tr><tr><td>何を伝えたいか</td><td>行事のお知らせ、活動の様子、提出のお願い</td></tr><tr><td>決まっている事実</td><td>日時、場所、締切、持ち物、提出先</td></tr></tbody></table></div>
+<h3 id="section-12">入力例</h3>
+<pre><code>保護者向けに、授業参観のお知らせ文を作ってください。
+
+日時：6月18日（木）5時間目
+場所：各教室
+対象：全学年の保護者
+伝えたいこと：子どもたちの普段の学習の様子を見てほしい
+注意：写真撮影は控えてほしい</code></pre>
+<h3 id="section-13">出力後にやること</h3>
+<p>出てきた文章は、そのまま使う前に次を確認します。</p>
+<ul><li>日時、曜日、場所、締切は正しいか</li><li>対象者は合っているか</li><li>提出先や問い合わせ先は抜けていないか</li><li>学校の実際のルールと合っているか</li><li>個人名、学級名、写真情報などが残っていないか</li></ul>
+<h2 id="section-14">4. マルチモジュールで使う</h2>
+<p>「作文します ver.2.3」は、1つの文書を作るために、複数の役割を組み合わせて使うこともできます。</p>
+<p>たとえば、写真やメモを整理し、必要ならWebで根拠を確認し、通信文や校務文書に仕上げ、最後に文体を整える、という流れです。</p>
+<p>利用者が「入力M、Web検索M、通信文M、文体Mを使って」と細かく指定する必要はありません。</p>
+<p>次のように、最初からゴールまでをまとめて頼めば大丈夫です。</p>
+<pre><code>次の素材をもとに、保護者向けの学級通信記事を作ってください。
+
+進め方：
+1. まず素材から、使える事実と不明点を整理する
+2. 子どもの心情は推測しない
+3. 通信文として自然な文章にする
+4. 最後に保護者向けのやわらかい文体に整える
+5. 足りない情報は〔未記入〕で残す
+
+素材：
+（ここに写真の説明、メモ、箇条書きなどを入れる）</code></pre>
+<h3 id="section-15">シングルモジュールとマルチモジュールの違い</h3>
+<div class="table-wrap"><table><thead><tr><th>使い方</th><th>向いている場面</th><th>頼み方</th></tr></thead><tbody><tr><td>シングルモジュール</td><td>作りたい文書がはっきりしている</td><td>学級通信を作ってください</td></tr><tr><td>マルチモジュール</td><td>素材整理から仕上げまで任せたい</td><td>素材整理、文章化、文体調整までお願いします</td></tr></tbody></table></div>
+<p>シングルモジュールは、目的がはっきりしているときに向いています。</p>
+<p>マルチモジュールは、材料がごちゃっとしているときや、調査・整理・文章化・点検まで一続きで進めたいときに向いています。</p>
+<h3 id="section-16">基本の流れ</h3>
+<p>マルチモジュールでは、次のような流れで頼むと安定します。</p>
+<pre><code>次の流れで進めてください。
+
+1. 素材を整理する
+2. 使える事実と不明点を分ける
+3. 必要なら根拠や制度を確認する
+4. 目的に合う文書にする
+5. 文体を整える
+6. 最後に確認事項を短く出す</code></pre>
+<p>このように流れを指定すると、Gemが「今は整理する段階か」「本文にする段階か」「仕上げる段階か」を区別しやすくなります。</p>
+<h3 id="section-17">例1 写真メモから学級通信へ</h3>
+<p>写真やメモをもとに、通信文まで仕上げたいときの頼み方です。</p>
+<pre><code>次のメモをもとに、学級通信の記事を作ってください。
+
+進め方：
+1. メモから観察できる事実を整理する
+2. 子どもの心情や成長は断定しない
+3. 保護者に伝わる通信文にする
+4. 最後に、やわらかく読みやすい文体に整える
+
+メモ：
+- 理科で植物の観察をした
+- 葉の形や色を見て、気づいたことをノートに書いた
+- 友達と見比べながら「こっちは少し色が薄い」と話していた
+- まとめの時間に、気づいたことを発表した</code></pre>
+<p>この場合、Gemの中では、素材整理、通信文作成、文体調整がつながって働きます。</p>
+<h3 id="section-18">例2 Web調査から保護者向け文書へ</h3>
+<p>公的情報を確認してから、保護者向け文書にしたいときの頼み方です。</p>
+<pre><code>熱中症対策について、保護者向けのお知らせ文を作ってください。
+
+進め方：
+1. まず学校配布文書に使える公的情報を整理する
+2. 出典、年度、対象が分かる情報を優先する
+3. 本文では、保護者が何を確認すればよいか分かる形にする
+4. 不確かな情報は断定しない
+5. 最後に、確認が必要な点を短く出す
+
+文体：
+丁寧で、心配をあおりすぎない表現</code></pre>
+<p>この場合、Web検索、HUB整理、校務文書作成、文体調整が組み合わさります。</p>
+<h3 id="section-19">例3 PDFや箇条書きから研修レポートへ</h3>
+<p>資料やメモをもとに、レポートまで仕上げたいときの頼み方です。</p>
+<pre><code>次の研修メモをもとに、実践レポートのたたき台を作ってください。
+
+進め方：
+1. メモを事実、成果、課題に分ける
+2. 足りない情報は〔未記入〕で残す
+3. レポートとして、目的・実践内容・結果・考察・課題の順に整える
+4. 根拠のない断定は避ける
+5. 最後に、追記するとよい情報を短く示す
+
+研修メモ：
+（ここにメモを貼る）</code></pre>
+<p>この場合、入力整理、レポート作成、文体調整、確認事項の整理がつながります。</p>
+<h3 id="section-20">例4 1つの素材から複数の出口を作る</h3>
+<p>同じ素材から、通信文と校務文書を両方作ることもできます。</p>
+<pre><code>次の素材をもとに、2種類の文章を作ってください。
+
+1. 学級通信に載せる文章
+2. 保護者向けの持ち物連絡文
+
+進め方：
+まず素材を整理し、通信文に使う内容と連絡文に使う内容を分けてください。
+その後、それぞれの文書として仕上げてください。
+
+素材：
+- 校外学習に向けて班で役割を決めた
+- しおりを見ながら集合時刻を確認した
+- 当日は水筒、帽子、雨具が必要
+- 詳細な集合時刻は〔未記入〕</code></pre>
+<p>同じ材料でも、通信文では「活動の様子」、連絡文では「必要な行動」を中心にします。</p>
+<h3 id="section-21">マルチモジュールで頼むときのコツ</h3>
+<p>マルチモジュールでは、次の5つを入れると安定します。</p>
+<ul><li>最終的に何を作るか</li><li>途中で何を整理してほしいか</li><li>推測してほしくないこと</li><li>不明点の扱い</li><li>最後に何を確認してほしいか</li></ul>
+<p>そのまま使える型は、次の通りです。</p>
+<pre><code>次の素材をもとに、最終的に〔作りたい文書〕を作ってください。
+
+進め方：
+1. まず素材を整理する
+2. 事実・不明点・確認事項を分ける
+3. 必要なら根拠や制度を確認する
+4. 目的に合う文章に仕上げる
+5. 文体を整える
+6. 最後に、配布前の確認事項を短く出す
+
+注意：
+- 推測で補わない
+- 個人情報は一般化する
+- 足りない情報は〔未記入〕で残す
+
+素材：
+（ここに材料を入れる）</code></pre>
+<h3 id="section-22">マルチモジュールでやりすぎないこと</h3>
+<p>便利ですが、一度に詰め込みすぎると出力がぼやけます。</p>
+<p>次のような場合は、2回に分けるのがおすすめです。</p>
+<ul><li>素材がとても多い</li><li>写真やPDFの読み取りが多い</li><li>Web調査が必要で、出典確認も重要</li><li>通信文、校務文書、レポートを同時に全部作りたい</li><li>管理職確認が必要な正式文書</li></ul>
+<p>迷ったら、まずこう頼みます。</p>
+<pre><code>いきなり本文にせず、まず素材整理と不明点の確認だけしてください。
+その後、文章化します。</code></pre>
+<h2 id="section-23">5. 通信文を作る</h2>
+<p>学級通信、学年通信、学校通信などを作るときは、活動の様子を箇条書きで入れるだけでも大丈夫です。</p>
+<h3 id="section-24">入力例</h3>
+<pre><code>学級通信に載せる文章を作ってください。
+
+内容：国語「話し合い」の学習
+子どもの様子：
+- 友達の考えを聞いて、自分の考えをノートに書き直していた
+- 司会役が「他に意見はありますか」と声をかけていた
+- 最後に、班ごとに決まったことを発表した
+
+保護者に伝えたいこと：
+話し合いを通して、相手の考えを聞きながら自分の考えを整理する姿が見られた。</code></pre>
+<h3 id="section-25">コツ</h3>
+<p>通信文では、「がんばりました」「成長しました」だけだと、少しぼんやりします。</p>
+<p>次のような具体的な場面を入れると、自然に温かい文章になります。</p>
+<ul><li>子どもの発言</li><li>手元の動き</li><li>友達との関わり</li><li>活動の流れ</li><li>前と比べた変化</li></ul>
+<h3 id="section-26">追加で頼めること</h3>
+<pre><code>もう少し保護者向けにやわらかくしてください。</code></pre>
+<pre><code>学年通信らしく、少し落ち着いた文体にしてください。</code></pre>
+<pre><code>300字くらいに短くしてください。</code></pre>
+<h2 id="section-27">6. 校務文書を作る</h2>
+<p>通知、案内、依頼、報告などの校務文書では、「読み手が何をすればよいか」が大切です。</p>
+<h3 id="section-28">入力例</h3>
+<pre><code>保護者向けに、個人面談希望票の提出をお願いする文書を作ってください。
+
+対象：全家庭
+提出物：個人面談希望票
+締切：6月10日（水）
+提出先：担任
+方法：紙で提出
+伝えたいこと：日程調整のため、期限までの提出に協力してほしい
+文体：丁寧で短め</code></pre>
+<h3 id="section-29">入れるとよい情報</h3>
+<div class="table-wrap"><table><thead><tr><th>情報</th><th>例</th></tr></thead><tbody><tr><td>文書の種類</td><td>通知、案内、依頼、報告</td></tr><tr><td>誰に出すか</td><td>保護者、教職員、地域</td></tr><tr><td>何をしてほしいか</td><td>提出、確認、参加、連絡</td></tr><tr><td>いつまでか</td><td>締切、日時、期間</td></tr><tr><td>どこへ出すか</td><td>担任、学校、事務室</td></tr><tr><td>問い合わせ先</td><td>学校、担当、学年</td></tr></tbody></table></div>
+<p>情報が足りない場合、Gemは勝手に埋めず、〔未記入〕や〔不明〕として残します。</p>
+<h2 id="section-30">7. レポートを作る</h2>
+<p>実践報告、研修レポート、振り返り、校務改善の報告などに使えます。</p>
+<p>レポートでは、感想だけでなく「根拠」「分析」「考察」を分けると読みやすくなります。</p>
+<h3 id="section-31">入力例</h3>
+<pre><code>校内研修の実践レポートを作ってください。
+
+テーマ：生成AIを活用した校務改善
+実践内容：
+- 会議資料の下書きをAIで作成した
+- 通知文のたたき台を作成した
+- 職員が修正してから使用した
+
+成果：
+- 下書き作成の時間が短くなった
+- 表現のたたき台があることで相談しやすくなった
+
+課題：
+- 個人情報を入力しないルールの徹底が必要
+- 最終確認は人が行う必要がある
+
+文量：1200字程度</code></pre>
+<h3 id="section-32">レポートで大事なこと</h3>
+<ul><li>事実と感想を分ける</li><li>数値や根拠がある場合は入れる</li><li>分からないことは分からないまま残す</li><li>条件や限界を短く書く</li><li>断定しすぎない</li></ul>
+<h2 id="section-33">8. 写真・PDF・メモを整理する</h2>
+<p>写真、PDF、板書、手書きメモ、箇条書きの素材をもとに文章を作りたい場合は、まず「整理して」と頼むと安全です。</p>
+<h3 id="section-34">入力例</h3>
+<pre><code>この写真から、学級通信に使えそうな事実を整理してください。
+子どもの気持ちは推測せず、見えることだけでお願いします。</code></pre>
+<pre><code>このメモを、保護者向け文書に使える情報と、まだ確認が必要な情報に分けてください。</code></pre>
+<h3 id="section-35">注意</h3>
+<p>写真やPDFでは、文字が読みにくいことがあります。</p>
+<p>読めない部分は、Gemが〔判別困難〕として残すことがあります。これは失敗ではありません。推測で埋めないための安全な処理です。</p>
+<h2 id="section-36">9. Web調査を使う</h2>
+<p>制度、統計、最新情報、公的資料を使いたいときは、Web調査を頼みます。</p>
+<h3 id="section-37">入力例</h3>
+<pre><code>小学校での生成AI活用に関する公的資料を調べて、研修資料に使える根拠を整理してください。
+本文はまだ作らず、出典と要点だけまとめてください。</code></pre>
+<pre><code>熱中症対策について、学校配布文書に使える公的情報を整理してください。
+年度や対象が分かるようにしてください。</code></pre>
+<h3 id="section-38">Web調査で大事なこと</h3>
+<ul><li>官公庁、自治体、公的機関の情報を優先する</li><li>年度、対象、地域、定義を確認する</li><li>ニュース記事だけで断定しない</li><li>出典が弱い情報は、本文の根拠にしない</li></ul>
+<h2 id="section-39">10. 文体を整える</h2>
+<p>すでにある文章を、意味を変えずに整えることもできます。</p>
+<h3 id="section-40">入力例</h3>
+<pre><code>次の文章を、意味を変えずに、保護者向けにやわらかく整えてください。</code></pre>
+<pre><code>この文章を、校内文書として少し公式な文体にしてください。
+内容や条件は変えないでください。</code></pre>
+<pre><code>語尾の繰り返しを減らし、読みやすくしてください。
+ただし、日時・対象・締切は変えないでください。</code></pre>
+<h3 id="section-41">注意</h3>
+<p>文体調整では、事実を増やしたり、未確定情報を自然に埋めたりしません。</p>
+<p>「きれいにする」よりも、「意味が正しく届くようにする」ことを優先します。</p>
+<h2 id="section-42">11. よく使う頼み方テンプレート</h2>
+<h3 id="section-43">保護者向けのお知らせ</h3>
+<pre><code>保護者向けのお知らせ文を作ってください。
+
+内容：
+対象：
+日時：
+場所：
+持ち物：
+締切：
+お願いしたいこと：
+文体：丁寧で分かりやすく</code></pre>
+<h3 id="section-44">学級通信の記事</h3>
+<pre><code>学級通信の記事を作ってください。
+
+活動名：
+活動のねらい：
+子どもの様子：
+- 
+- 
+- 
+保護者に伝えたいこと：
+文量：
+文体：</code></pre>
+<h3 id="section-45">校内向け依頼文</h3>
+<pre><code>教職員向けの依頼文を作ってください。
+
+依頼内容：
+対象：
+締切：
+提出先：
+方法：
+補足：
+文体：簡潔で失礼のない校務文書</code></pre>
+<h3 id="section-46">レポート</h3>
+<pre><code>次の内容でレポートを作ってください。
+
+テーマ：
+目的：
+実践内容：
+結果：
+考察：
+課題：
+文字数：
+読み手：</code></pre>
+<h3 id="section-47">文章の手直し</h3>
+<pre><code>次の文章を手直ししてください。
+
+目的：
+読み手：
+直したい点：
+- 分かりやすく
+- 丁寧に
+- 短く
+- 公式文書らしく
+
+本文：
+（ここに文章を貼る）</code></pre>
+<h2 id="section-48">12. うまくいかないときの直し方</h2>
+<h3 id="section-49">文章が長すぎる</h3>
+<pre><code>半分くらいの長さにしてください。
+重要な情報は残してください。</code></pre>
+<h3 id="section-50">文章がかたい</h3>
+<pre><code>保護者に伝わるように、もう少しやわらかくしてください。
+ただし、内容は変えないでください。</code></pre>
+<h3 id="section-51">文章がやわらかすぎる</h3>
+<pre><code>学校からの正式なお知らせとして、少し落ち着いた文体にしてください。</code></pre>
+<h3 id="section-52">何をすればよいか分かりにくい</h3>
+<pre><code>読み手が何をすればよいか分かるように、締切・提出先・方法を目立たせてください。</code></pre>
+<h3 id="section-53">子どもの様子が抽象的</h3>
+<pre><code>「がんばった」だけでなく、行動や発言が伝わるように書き直してください。</code></pre>
+<h3 id="section-54">不明点が多くて止まってしまう</h3>
+<pre><code>分かる範囲で下書きを作り、不明なところだけ〔未記入〕で残してください。</code></pre>
+<h2 id="section-55">13. 個人情報の扱い</h2>
+<p>学校で使う場合は、個人情報に注意します。</p>
+<p>Gemに入力する前に、必要に応じて次のように置き換えます。</p>
+<div class="table-wrap"><table><thead><tr><th>入力前</th><th>置き換え例</th></tr></thead><tbody><tr><td>児童の氏名</td><td>Aさん、児童A、ある児童</td></tr><tr><td>保護者名</td><td>保護者、あるご家庭</td></tr><tr><td>学級名</td><td>本学級、該当学級</td></tr><tr><td>住所、電話番号</td><td>入力しない</td></tr><tr><td>成績、健康情報</td><td>原則入力しない</td></tr></tbody></table></div>
+<p>写真を使う場合も、顔、名札、掲示物、ノートの氏名などが写っていないか確認します。</p>
+<h2 id="section-56">14. 仕上げ前チェックリスト</h2>
+<p>文章を配布・共有する前に、次を確認します。</p>
+<ul><li>日時、曜日、場所は正しい</li><li>対象者が明確</li><li>締切や提出先が明確</li><li>持ち物や費用が抜けていない</li><li>問い合わせ先が必要に応じて入っている</li><li>個人情報が残っていない</li><li>子どもの心情や成長を根拠なく断定していない</li><li>読み手を責める表現になっていない</li><li>学校の方針や管理職確認が必要な内容は確認済み</li><li>そのまま配布できる形式になっている</li></ul>
+<h2 id="section-57">15. 初心者向けの一番簡単な使い方</h2>
+<p>迷ったら、次の形で頼めば大丈夫です。</p>
+<pre><code>次の内容をもとに、保護者向けの文章を作ってください。
+足りない情報は推測せず、〔未記入〕で残してください。
+
+目的：
+読み手：
+伝えたいこと：
+決まっていること：
+文体：</code></pre>
+<p>文章づくりに慣れていない場合は、最初から完成文を目指さなくて大丈夫です。</p>
+<p>まずは「たたき台」を作り、次に「短くする」「やわらかくする」「校務文書らしくする」「不明点を一覧にする」と頼むと、少しずつ使いやすい文章に近づきます。</p>
+<h2 id="section-58">16. 慣れてきた人向けの裏技</h2>
+<p>ここからは、少し慣れてきた人向けの使い方です。</p>
+<p>難しい操作ではありません。頼み方を少し工夫するだけで、出てくる文章がかなり使いやすくなります。</p>
+<h3 id="section-59">裏技1 最初に「完成版」ではなく「3案」出してもらう</h3>
+<p>いきなり1つの完成文を出してもらうより、先に方向性を比べると失敗が減ります。</p>
+<pre><code>この内容で、保護者向けの文章を3案作ってください。
+
+1案目：やわらかめ
+2案目：短く事務的
+3案目：学年通信らしく温かめ
+
+その後、どれを採用するか選びます。</code></pre>
+<h3 id="section-60">裏技2 「そのまま使う版」と「確認用メモ」を分ける</h3>
+<p>配布文と、自分用の確認事項を分けると、校務文書で使いやすくなります。</p>
+<pre><code>出力を次の2つに分けてください。
+
+1. そのまま配布できる本文
+2. 作成者が確認すべき未記入・注意点
+
+本文には内部メモを入れないでください。</code></pre>
+<h3 id="section-61">裏技3 「穴埋め式」にしてもらう</h3>
+<p>まだ情報がそろっていないときは、文章を止めずに穴埋め式で作ってもらいます。</p>
+<pre><code>分かっている情報だけで下書きを作ってください。
+足りないところは〔未記入〕として残し、あとで埋められる形にしてください。</code></pre>
+<h3 id="section-62">裏技4 先に「不明点だけ」聞いてもらう</h3>
+<p>重要な文書では、作る前に不足情報を確認してもらうと安全です。</p>
+<pre><code>この文書を作る前に、足りない情報を最大5つまで質問してください。
+細かすぎる確認は不要です。</code></pre>
+<h3 id="section-63">裏技5 文章を短くする専用の頼み方</h3>
+<p>「短くして」だけだと、大事な情報まで消えることがあります。</p>
+<p>次のように頼むと、必要事項を残しやすくなります。</p>
+<pre><code>日時・対象・締切・提出先は残したまま、本文を半分の長さにしてください。
+読み手が行動するために必要な情報は削らないでください。</code></pre>
+<h3 id="section-64">裏技6 子どもの姿を具体的にする</h3>
+<p>通信文が「がんばりました」「成長しました」ばかりになるときに使います。</p>
+<pre><code>抽象的な評価語を減らし、行動・発言・手元の動きが伝わる文章にしてください。
+ただし、子どもの心情は推測しないでください。</code></pre>
+<h3 id="section-65">裏技7 文体だけを変える</h3>
+<p>内容はよいけれど、言い方だけ直したいときに使います。</p>
+<pre><code>内容・日時・条件は一切変えずに、文体だけを整えてください。
+保護者向けに、丁寧でやわらかい表現にしてください。</code></pre>
+<h3 id="section-66">裏技8 管理職確認前のチェックに使う</h3>
+<p>管理職に見せる前に、抜けや誤読リスクを確認できます。</p>
+<pre><code>この文書を管理職確認に出す前に、次の観点で点検してください。
+
+- 日時・対象・締切の抜け
+- 読み手が迷いそうな表現
+- 個人情報
+- 責任主体が曖昧なところ
+- 保護者が責められているように読める表現
+
+修正文も提案してください。</code></pre>
+<h3 id="section-67">裏技9 「前回と同じ雰囲気」に寄せる</h3>
+<p>過去の通信文や案内文がある場合は、それを見本にできます。</p>
+<pre><code>次の見本文の雰囲気に合わせて、新しい文章を作ってください。
+ただし、内容や事実は今回の情報だけを使ってください。
+
+見本文：
+（ここに前回の文章）
+
+今回の内容：
+（ここに今回の情報）</code></pre>
+<h3 id="section-68">裏技10 最後に「配布直前版」に整える</h3>
+<p>下書きができたら、最後に仕上げ専用の依頼をします。</p>
+<pre><code>この文章を配布直前版に整えてください。
+
+- 誤字脱字を直す
+- 表記ゆれをそろえる
+- 読み手が行動しやすい順番にする
+- 個人情報があれば一般化する
+- 不明点は勝手に埋めず〔未記入〕で残す</code></pre>
+<h3 id="section-69">裏技11 「厳しめチェック」と「やさしめ修正」を分ける</h3>
+<p>点検は厳しく、修正案はやわらかく出してもらう方法です。</p>
+<pre><code>まず、この文書の問題点を厳しめに点検してください。
+その後、読み手を責めないやわらかい表現で修正版を作ってください。</code></pre>
+<h3 id="section-70">裏技12 毎回使う「定番プロンプト」を作っておく</h3>
+<p>よく使う文書は、毎回同じ型で頼むと安定します。</p>
+<pre><code>以下の型で、保護者向け文書を作ってください。
+
+【件名】
+【本文】
+【お願い】
+【締切】
+【提出先】
+【問い合わせ先】
+【確認が必要な点】
+
+足りない情報は〔未記入〕で残してください。</code></pre>
+<h3 id="section-71">裏技を使うときの注意</h3>
+<p>裏技は便利ですが、最後の確認は必ず人が行います。</p>
+<p>特に、次の内容はGemに任せきりにしません。</p>
+<ul><li>日時、曜日、場所</li><li>金額、集金方法</li><li>個人情報</li><li>健康、安全に関わる内容</li><li>学校としての正式判断</li><li>管理職確認が必要な内容</li></ul>
+<p>Gemは、文章づくりの手間を減らす道具です。</p>
+<p>最終的に「学校として出してよいか」「読み手が誤解しないか」を判断するのは、人の役割です。</p>
+<h2 id="section-72">17. 秘技：カスタム版「作文します」を作る</h2>
+<p>ここからは、管理者や慣れてきた人向けの使い方です。</p>
+<p>Gems「作文します」は、Knowledgeに入れるファイルを加えたり、外したり、内容を少し直したりすることで、自分の学校・学年・用途に合わせたカスタム版にできます。</p>
+<h3 id="section-73">カスタム版でできること</h3>
+<p>たとえば、次のような専用Gemを作れます。</p>
+<ul><li>学級通信をよく作る人向けの「通信文強化版」</li><li>保護者向け文書を多く作る「校務文書強化版」</li><li>研修報告や実践記録に強い「レポート強化版」</li><li>素材整理から配布文まで進める「マルチモジュール版」</li><li>文体を学校のいつもの雰囲気に寄せた「自校文体版」</li><li>初心者向けに質問を少なくした「かんたん作文版」</li></ul>
+<p>ポイントは、Gem本体を大きく変えるのではなく、Knowledgeを調整することです。</p>
+<h3 id="section-74">基本の考え方</h3>
+<p>カスタム版を作るときは、次の順番で考えます。</p>
+<div class="table-wrap"><table><thead><tr><th>目的</th><th>Knowledgeで調整するもの</th></tr></thead><tbody><tr><td>通信文を強くしたい</td><td>通信文作成M、過去の通信文見本、よく使う表現集</td></tr><tr><td>校務文書を強くしたい</td><td>校務文書作成M、通知・依頼・案内のテンプレート</td></tr><tr><td>レポートを強くしたい</td><td>レポート編集・作成M、実践報告の構成例</td></tr><tr><td>素材整理から仕上げまで扱いたい</td><td>入力M、Web検索M、出力M、文体M、点検用テンプレート</td></tr><tr><td>文体をそろえたい</td><td>文体づくりM、学校で使う文体見本</td></tr><tr><td>初心者向けにしたい</td><td>入力例、よくある依頼文、穴埋めテンプレート</td></tr></tbody></table></div>
+<h3 id="section-75">加えると便利なKnowledge</h3>
+<p>追加すると効果が出やすいのは、次のようなファイルです。</p>
+<ul><li>よく使う通知文のテンプレート</li><li>過去の学級通信や学年通信の見本文</li><li>学校で決まっている表記ルール</li><li>よく使う件名、あいさつ、締めの文</li><li>年間行事でよく出る案内文の型</li><li>管理職確認前のチェック項目</li><li>自分がよく頼むプロンプト集</li></ul>
+<p>ただし、児童名、保護者名、成績、健康情報、住所、電話番号などの個人情報は入れません。</p>
+<h3 id="section-76">外すとよいKnowledge</h3>
+<p>カスタム版では、使わないKnowledgeを外すと動きが軽くなることがあります。</p>
+<p>たとえば、通信文だけに使うGemなら、Web検索MやレポートMを外してもよい場合があります。</p>
+<p>反対に、研修資料や実践報告に使うGemなら、通信文Mを外して、レポートMとWeb検索Mを中心にしてもよいです。</p>
+<h3 id="section-77">修正するときのコツ</h3>
+<p>Knowledgeの中身を直すときは、大きく書き換えすぎないのがコツです。</p>
+<p>次のように、目的を絞って修正します。</p>
+<pre><code>このGemでは、保護者向け文書を中心に扱う。
+文体は、丁寧で短く、読み手が次に何をすればよいか分かる形を優先する。
+未確定情報は推測せず、〔未記入〕として残す。</code></pre>
+<p>「何でもできるGem」にしようとするより、「この用途では迷わないGem」にした方が安定します。</p>
+<h3 id="section-78">おすすめのカスタム版3種類</h3>
+<h4 id="section-79">1. 通信文強化版</h4>
+<p>向いている人：</p>
+<ul><li>学級通信や学年通信をよく作る</li><li>子どもの様子を自然に伝えたい</li><li>温かいが、推測しすぎない文章にしたい</li></ul>
+<p>Knowledgeに入れるもの：</p>
+<ul><li>HUB本体</li><li>通信文作成M</li><li>文体づくりM</li><li>過去の通信文見本</li><li>よく使う活動紹介の型</li></ul>
+<p>最初の頼み方：</p>
+<pre><code>学級通信の記事を作ってください。
+子どもの心情は推測せず、行動や発言から伝わる文章にしてください。</code></pre>
+<h4 id="section-80">2. 校務文書強化版</h4>
+<p>向いている人：</p>
+<ul><li>保護者向け通知や依頼文をよく作る</li><li>締切、提出先、問い合わせ先の抜けを減らしたい</li><li>丁寧で誤解の少ない文章にしたい</li></ul>
+<p>Knowledgeに入れるもの：</p>
+<ul><li>HUB本体</li><li>校務文書作成M</li><li>文体づくりM</li><li>通知・案内・依頼のテンプレート</li><li>管理職確認前チェックリスト</li></ul>
+<p>最初の頼み方：</p>
+<pre><code>保護者向けの依頼文を作ってください。
+読み手が何を、いつまでに、どこへ出すのか分かる形にしてください。</code></pre>
+<h4 id="section-81">3. レポート強化版</h4>
+<p>向いている人：</p>
+<ul><li>研修報告や実践記録を書く</li><li>事実、分析、考察を分けたい</li><li>根拠のある文章にしたい</li></ul>
+<p>Knowledgeに入れるもの：</p>
+<ul><li>HUB本体</li><li>レポート編集・作成M</li><li>Web検索M</li><li>文体づくりM</li><li>実践報告の構成例</li></ul>
+<p>最初の頼み方：</p>
+<pre><code>次の実践内容をもとに、研修レポートのたたき台を作ってください。
+事実・考察・今後の課題を分けてください。</code></pre>
+<h4 id="section-82">4. マルチモジュール版</h4>
+<p>向いている人：</p>
+<ul><li>写真、メモ、PDF、Web情報などをまとめて文章化したい</li><li>素材整理から文体調整まで一気通貫で進めたい</li><li>通信文、校務文書、レポートを場面に応じて使い分けたい</li></ul>
+<p>Knowledgeに入れるもの：</p>
+<ul><li>HUB本体</li><li>データ・写真入力M</li><li>Web検索M</li><li>通信文作成M、校務文書作成M、レポートMのうち必要なもの</li><li>文体づくりM</li><li>配布前チェックリスト</li><li>よく使うマルチモジュール用プロンプト</li></ul>
+<p>最初の頼み方：</p>
+<pre><code>次の素材をもとに、素材整理から文章化、文体調整、確認事項の整理まで進めてください。
+最終的には保護者向け文書にしてください。
+不明点は推測せず、〔未記入〕で残してください。</code></pre>
+<h3 id="section-83">カスタム版を作るときの注意</h3>
+<p>カスタム版を作ると便利ですが、次の点は守ります。</p>
+<ul><li>個人情報をKnowledgeに入れない</li><li>過去文書を入れるときは、氏名や学級名を一般化する</li><li>学校の正式判断をGemに決めさせない</li><li>古いルールや古い日付の文書を入れっぱなしにしない</li><li>追加しすぎて、何のGemか分からない状態にしない</li></ul>
+<p>Knowledgeは、多ければ多いほどよいわけではありません。</p>
+<p>よく使う目的に合わせて、必要なものだけ入れる方が安定します。</p>
+<h3 id="section-84">秘技のまとめ</h3>
+<p>カスタム版「作文します」を作るコツは、次の一言です。</p>
+<pre><code>本体は短く、Knowledgeは目的に合わせて入れ替える。</code></pre>
+<p>まずは、通常版を使ってみて、よく使う用途が見えてきたら、通信文用、校務文書用、レポート用のように分けて育てるのがおすすめです。</p>
+    </main>
+  </div>
+</body>
+</html>
