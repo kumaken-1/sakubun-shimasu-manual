@@ -18,6 +18,8 @@ GitHub Pagesでアプリをそのまま使えるように、ルートの `index.
 - `index.html`: GitHub Pages公開用アプリ
 - `sakubun/index.html`: Gems「作文します ver.2.3」マニュアル公開用
 - `school-management/index.html`: Gem「学校マネジメント相談室」マニュアル公開用
+- `docs/sakubun/index.html`: GitHub Pagesの公開元が `docs` の場合のGems「作文します ver.2.3」マニュアル公開用
+- `docs/school-management/index.html`: GitHub Pagesの公開元が `docs` の場合のGem「学校マネジメント相談室」マニュアル公開用
 - `docs/Gem学校マネジメント相談室_使い方マニュアル.html`: HTML版マニュアル
 - `docs/Gem学校マネジメント相談室_使い方マニュアル.md`: Markdown版マニュアル
 - `docs/Gems作文しますver2.3_使い方マニュアル.html`: HTML版マニュアル
@@ -45,4 +47,6 @@ GitHub Pagesでアプリをそのまま使えるように、ルートの `index.
 ```powershell
 Copy-Item 'docs/Gems作文しますver2.3_使い方マニュアル.html' 'sakubun/index.html' -Force
 Copy-Item 'docs/Gem学校マネジメント相談室_使い方マニュアル.html' 'school-management/index.html' -Force
+Copy-Item 'docs/Gems作文しますver2.3_使い方マニュアル.html' 'docs/sakubun/index.html' -Force
+Copy-Item 'docs/Gem学校マネジメント相談室_使い方マニュアル.html' 'docs/school-management/index.html' -Force
 ```
