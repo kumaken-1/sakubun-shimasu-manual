@@ -154,6 +154,33 @@ def build_html(title: str, body: str, toc: list[tuple[str, str, int]]) -> str:
     quick_start_id = toc_id("0.", "section-2")
     multi_module_id = toc_id("4. マルチモジュール", "section-14")
     custom_id = toc_id("17. 秘技", "section-72")
+    hero = {
+        "eyebrow": "初心者が3分で試せる学校文書AIガイド",
+        "lead": "通信文、校務文書、レポート、素材整理、Web調査まで。まず試して、少しずつ自分の仕事に合わせて育てるための実用マニュアルです。",
+        "primary": "まず使ってみる",
+        "secondary": "マルチモジュールを見る",
+        "third": "カスタム版の作り方",
+        "panel_title": "読む前に、まず1回。",
+        "panel_text": "完璧な指示はいりません。下書き、不明点、確認事項まで一緒に出す使い方から始められます。",
+        "metric_1": "3分<br>お試し",
+        "metric_2": "17章<br>実務型",
+        "metric_3": "コピペ<br>例つき",
+    }
+    if "学校マネジメント相談室" in title:
+        multi_module_id = toc_id("4. 相談の進み方", multi_module_id)
+        custom_id = toc_id("17. 秘技", custom_id)
+        hero = {
+            "eyebrow": "初心者が3分で試せる学校マネジメントAIガイド",
+            "lead": "校内の相談、判断の整理、生徒指導、安全管理、教務運営、研究マネジメントまで。困りごとをIssueに整え、学校として次に何を決めるかへつなげる実用マニュアルです。",
+            "primary": "まず相談してみる",
+            "secondary": "相談の進み方を見る",
+            "third": "カスタム版の作り方",
+            "panel_title": "読む前に、まず1回。",
+            "panel_text": "完璧な相談文はいりません。事実、困り感、不明点をそのまま入れるところから始められます。",
+            "metric_1": "3分<br>お試し",
+            "metric_2": "17章<br>相談型",
+            "metric_3": "コピペ<br>例つき",
+        }
     generated = date.today().strftime("%Y年%-m月%-d日") if sys.platform != "win32" else f"{date.today().year}年{date.today().month}月{date.today().day}日"
     body = re.sub(r"<h1[^>]*>.*?</h1>", "", body, count=1, flags=re.DOTALL)
     return f"""<!doctype html>
@@ -578,22 +605,22 @@ def build_html(title: str, body: str, toc: list[tuple[str, str, int]]) -> str:
   <header class="hero">
     <div class="hero-inner">
       <div class="hero-copy">
-        <p class="eyebrow">初心者が3分で試せる学校文書AIガイド</p>
+        <p class="eyebrow">{hero["eyebrow"]}</p>
         <h1>{escape(title)}</h1>
-        <p class="hero-lead">通信文、校務文書、レポート、素材整理、Web調査まで。まず試して、少しずつ自分の仕事に合わせて育てるための実用マニュアルです。</p>
+        <p class="hero-lead">{hero["lead"]}</p>
         <div class="hero-actions">
-          <a href="#{quick_start_id}">まず使ってみる</a>
-          <a href="#{multi_module_id}">マルチモジュールを見る</a>
-          <a href="#{custom_id}">カスタム版の作り方</a>
+          <a href="#{quick_start_id}">{hero["primary"]}</a>
+          <a href="#{multi_module_id}">{hero["secondary"]}</a>
+          <a href="#{custom_id}">{hero["third"]}</a>
         </div>
       </div>
       <div class="hero-panel">
-        <strong>読む前に、まず1回。</strong>
-        <span>完璧な指示はいりません。下書き、不明点、確認事項まで一緒に出す使い方から始められます。</span>
+        <strong>{hero["panel_title"]}</strong>
+        <span>{hero["panel_text"]}</span>
         <div class="quick-metrics">
-          <div>3分<br>お試し</div>
-          <div>17章<br>実務型</div>
-          <div>コピペ<br>例つき</div>
+          <div>{hero["metric_1"]}</div>
+          <div>{hero["metric_2"]}</div>
+          <div>{hero["metric_3"]}</div>
         </div>
       </div>
     </div>
