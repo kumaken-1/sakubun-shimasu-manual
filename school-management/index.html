@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gem「学校マネジメント相談室」使い方マニュアル</title>
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --paper: #ffffff;
+      --ink: #071b5f;
+      --muted: #4b5570;
+      --line: #dbe1ef;
+      --nav: #071b5f;
+      --accent: #ff4b4b;
+      --accent-2: #071b5f;
+      --accent-3: #ff6a5c;
+      --accent-soft: #fff1f1;
+      --blue-soft: #eef3ff;
+      --code-bg: #071b5f;
+      --code-ink: #f7fbff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: "Yu Gothic", "YuGothic", "Meiryo", system-ui, sans-serif;
+      line-height: 1.75;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 16px 16px, rgba(255, 75, 75, 0.12) 2px, transparent 2px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(to bottom, #000 0%, transparent 55%);
+    }
+    .hero {
+      position: relative;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 28px 24px 0;
+    }
+    .hero-inner {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      border: 3px solid var(--nav);
+      border-radius: 18px;
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 0 18px 0 rgba(7, 27, 95, 0.09);
+    }
+    .hero-copy {
+      padding: 30px 38px 34px;
+      text-align: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 14px;
+      padding: 4px 16px;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--nav);
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0;
+      border-top: 4px dotted var(--accent);
+      border-bottom: 4px dotted var(--accent);
+    }
+    .hero h1 {
+      margin: 0;
+      max-width: none;
+      font-size: clamp(2.35rem, 6vw, 5.6rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+      font-weight: 900;
+    }
+    .hero h1::first-letter {
+      color: var(--accent);
+    }
+    .hero-lead {
+      max-width: 900px;
+      margin: 18px auto 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      font-weight: 700;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      justify-content: center;
+    }
+    .hero-actions a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 8px 16px;
+      border: 2px solid var(--accent);
+      border-radius: 999px;
+      color: #fff;
+      background: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+    .hero-actions a:first-child {
+      color: #fff;
+      background: var(--nav);
+      border-color: var(--nav);
+    }
+    .hero-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      margin: 0 26px 26px;
+      padding: 18px 22px;
+      border: 2px solid var(--nav);
+      border-radius: 14px;
+      background: var(--blue-soft);
+      color: var(--ink);
+      text-align: left;
+    }
+    .hero-panel strong {
+      display: block;
+      font-size: 1.25rem;
+      line-height: 1.35;
+    }
+    .hero-panel span {
+      display: block;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .quick-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 4px;
+      min-width: 260px;
+    }
+    .quick-metrics div {
+      padding: 10px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.35;
+    }
+    .page {
+      display: grid;
+      grid-template-columns: minmax(230px, 292px) minmax(0, 1fr);
+      gap: 22px;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px 24px 64px;
+      position: relative;
+    }
+    aside {
+      position: sticky;
+      top: 20px;
+      align-self: start;
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+      padding: 16px;
+      border: 3px solid var(--nav);
+      border-radius: 14px;
+      background: var(--nav);
+      color: #fff;
+      box-shadow: 0 10px 0 rgba(7, 27, 95, 0.12);
+    }
+    aside h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      color: #fff;
+      text-align: center;
+      border-bottom: 4px dotted var(--accent);
+      padding-bottom: 10px;
+    }
+    aside a {
+      display: block;
+      margin: 3px 0;
+      padding: 7px 9px;
+      border-radius: 8px;
+      color: #d9e7ec;
+      text-decoration: none;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+    aside a:hover {
+      color: #202124;
+      background: #fff;
+    }
+    .toc-level-1 { font-weight: 700; color: #fff; }
+    .toc-level-2 { padding-left: 16px; }
+    main {
+      min-width: 0;
+      padding: 4px 0 30px;
+      counter-reset: chapter;
+    }
+    main > * {
+      max-width: 860px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    main > h2,
+    main > h2 + p,
+    main > h2 + p + p {
+      max-width: 940px;
+    }
+    .meta {
+      max-width: 940px;
+      margin: 0 auto 14px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: right;
+    }
+    main h1 {
+      display: none;
+    }
+    main > h2 {
+      counter-increment: chapter;
+      position: relative;
+      margin: 26px auto 18px;
+      padding: 20px 24px 20px 84px;
+      border: 3px solid var(--nav);
+      border-radius: 14px;
+      background: var(--paper);
+      box-shadow: 0 8px 0 rgba(7, 27, 95, 0.08);
+      font-size: clamp(1.35rem, 2vw, 1.75rem);
+      line-height: 1.45;
+    }
+    main > h2::before {
+      content: counter(chapter, decimal-leading-zero);
+      position: absolute;
+      left: 22px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    main > h2:nth-of-type(3n + 1)::before { background: var(--accent); }
+    main > h2:nth-of-type(3n + 2)::before { background: var(--nav); }
+    main h3 {
+      margin: 30px auto 12px;
+      padding: 10px 14px;
+      border-left: 7px solid var(--accent);
+      border-radius: 8px;
+      background: var(--accent-soft);
+      font-size: 1.14rem;
+    }
+    main h4 {
+      margin: 24px auto 8px;
+      color: var(--nav);
+      font-size: 1.03rem;
+    }
+    p { margin: 0 0 16px; }
+    ul {
+      margin: 0 0 18px;
+      padding: 0;
+      list-style: none;
+    }
+    li {
+      position: relative;
+      margin: 7px 0;
+      padding-left: 24px;
+    }
+    li::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 0.82em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    code {
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+      background: #edf1f5;
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 0.94em;
+    }
+    pre {
+      position: relative;
+      max-width: 940px;
+      margin: 18px auto 26px;
+      padding: 44px 20px 20px;
+      overflow: auto;
+      border: 1px solid #2d3a47;
+      border-radius: 14px;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      line-height: 1.7;
+      white-space: pre-wrap;
+      box-shadow: 0 8px 0 rgba(7, 27, 95, 0.16);
+    }
+    pre::before {
+      content: "そのまま使えるプロンプト";
+      position: absolute;
+      left: 16px;
+      top: 12px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+    pre code {
+      padding: 0;
+      background: transparent;
+      color: inherit;
+      font-size: 0.94rem;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      max-width: 940px;
+      margin: 18px auto 24px;
+      border: 3px solid var(--nav);
+      border-radius: 14px;
+      box-shadow: 0 8px 0 rgba(7, 27, 95, 0.08);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 540px;
+      background: #fff;
+    }
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--nav);
+      color: #fff;
+      font-weight: 700;
+    }
+    tr:last-child td { border-bottom: 0; }
+    tr:nth-child(even) td { background: var(--blue-soft); }
+    @media (max-width: 880px) {
+      .hero {
+        padding: 16px 16px 0;
+      }
+      .hero-inner {
+        display: block;
+        border-radius: 16px;
+      }
+      .hero-copy {
+        padding: 26px 22px;
+      }
+      .hero-panel {
+        display: block;
+        padding: 22px;
+        margin: 0 16px 18px;
+      }
+      .quick-metrics {
+        grid-template-columns: 1fr;
+      }
+      .page {
+        display: block;
+        padding: 16px;
+      }
+      aside {
+        position: static;
+        max-height: none;
+        margin-bottom: 16px;
+      }
+      main {
+        padding: 4px 0 40px;
+      }
+      .meta {
+        text-align: left;
+      }
+      main > h2 {
+        padding: 18px 18px 18px 70px;
+      }
+      main > h2::before {
+        left: 16px;
+        width: 38px;
+        height: 38px;
+      }
+    }
+    @media print {
+      body { background: #fff; }
+      body::before, .hero { display: none; }
+      .page { display: block; max-width: none; padding: 0; }
+      aside { display: none; }
+      main {
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+      }
+      h2 { break-after: avoid; }
+      pre, table { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">初心者が3分で試せる学校マネジメントAIガイド</p>
+        <h1>Gem「学校マネジメント相談室」使い方マニュアル</h1>
+        <p class="hero-lead">校内の相談、判断の整理、生徒指導、安全管理、教務運営、研究マネジメントまで。困りごとをIssueに整え、学校として次に何を決めるかへつなげる実用マニュアルです。</p>
+        <div class="hero-actions">
+          <a href="#section-2">まず相談してみる</a>
+          <a href="#section-15">相談の進み方を見る</a>
+          <a href="#section-66">カスタム版の作り方</a>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <strong>読む前に、まず1回。</strong>
+        <span>完璧な相談文はいりません。事実、困り感、不明点をそのまま入れるところから始められます。</span>
+        <div class="quick-metrics">
+          <div>3分<br>お試し</div>
+          <div>17章<br>相談型</div>
+          <div>コピペ<br>例つき</div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="page">
+    <aside>
+      <h2>目次</h2>
+      <a class="toc-level-1" href="#section-1">Gem「学校マネジメント相談室」使い方マニュアル</a>
+<a class="toc-level-2" href="#section-2">0. まず3分だけ使ってみる</a>
+<a class="toc-level-2" href="#section-8">1. このGemでできること</a>
+<a class="toc-level-2" href="#section-9">2. はじめに知っておくこと</a>
+<a class="toc-level-2" href="#section-10">3. 基本の使い方</a>
+<a class="toc-level-2" href="#section-15">4. 相談の進み方</a>
+<a class="toc-level-2" href="#section-16">5. Issueとは何か</a>
+<a class="toc-level-2" href="#section-19">6. 学校づくり・校内体制の相談</a>
+<a class="toc-level-2" href="#section-23">7. 生徒指導・児童理解の相談</a>
+<a class="toc-level-2" href="#section-27">8. 危機管理・安全管理の相談</a>
+<a class="toc-level-2" href="#section-31">9. 教務運営・年間計画の相談</a>
+<a class="toc-level-2" href="#section-35">10. たい焼き型研究マネジメントの相談</a>
+<a class="toc-level-2" href="#section-39">11. 成果物を作ってもらう</a>
+<a class="toc-level-2" href="#section-43">12. よく使う頼み方テンプレート</a>
+<a class="toc-level-2" href="#section-49">13. うまくいかないときの直し方</a>
+<a class="toc-level-2" href="#section-56">14. 個人情報・センシティブ情報の扱い</a>
+<a class="toc-level-2" href="#section-57">15. 仕上げ前チェックリスト</a>
+<a class="toc-level-2" href="#section-58">16. 慣れてきた人向けの裏技</a>
+<a class="toc-level-2" href="#section-66">17. 秘技：カスタム版「学校マネジメント相談室」を作る</a>
+    </aside>
+    <main>
+      <p class="meta">HTML版生成日：2026年5月23日</p>
+      
+<h2 id="section-2">0. まず3分だけ使ってみる</h2>
+<p>このマニュアルを全部読む前に、まず1回だけ相談してみましょう。</p>
+<p>最初から、きれいな文章にする必要はありません。状況、困っていること、迷っていることをそのまま入れて大丈夫です。</p>
+<h3 id="section-3">まず試すならこの3つ</h3>
+<h4 id="section-4">校内の相談を整理したいとき</h4>
+<pre><code>学校マネジメントの相談です。
+
+状況：
+学年会で決めたことが、職員会議に上がる前に何度も差し戻されています。
+
+困っていること：
+誰がどこまで決めてよいのかが曖昧で、担当者の負担が増えています。
+
+お願い：
+事実・困り感・不明点を分けて、学校として何を決めれば前に進むかを整理してください。</code></pre>
+<h4 id="section-5">生徒指導や児童理解で迷っているとき</h4>
+<pre><code>生徒指導の相談です。
+
+状況：
+休み時間に友達とのトラブルがあり、複数の児童の言い分が違っています。
+
+分かっていること：
+- けがはありません
+- 担任がそれぞれから話を聞きました
+- 保護者連絡をするか迷っています
+
+お願い：
+事実・訴え・不明点・リスクを分け、今日中に確認することを整理してください。</code></pre>
+<h4 id="section-6">教務や行事の調整で困っているとき</h4>
+<pre><code>教務運営の相談です。
+
+状況：
+行事が重なり、授業時数と職員の負担が厳しくなっています。
+
+決まっていること：
+- 6月に校外学習があります
+- 研究授業も同じ週に予定されています
+- 学年から負担が大きいという声があります
+
+お願い：
+MustとOptionを分け、調整できることと確認が必要なことを整理してください。</code></pre>
+<h3 id="section-7">最初のゴール</h3>
+<p>最初から完璧な解決策を出す必要はありません。</p>
+<p>まずは、次のどれかができれば成功です。</p>
+<ul><li>何が事実で、何が見立てか分かった</li><li>いま決めるべき一点が見えた</li><li>誰と共有すべきかが分かった</li><li>管理職、学年、分掌、教務などの動線が見えた</li><li>すぐ動くことと、確認してから動くことが分かれた</li></ul>
+<p>このGemは、答えを急いで増やす道具ではありません。</p>
+<p>相談をほどき、学校として何を決めれば前に進むかを見つけるための相談室です。</p>
+<h2 id="section-8">1. このGemでできること</h2>
+<p>「学校マネジメント相談室」は、学校運営に関する相談を整理し、次の判断につなげるためのGemです。</p>
+<p>たとえば、次のような相談に使えます。</p>
+<ul><li>学年、分掌、会議、校内体制の整理</li><li>職員の負担、役割分担、情報共有の見直し</li><li>生徒指導、児童理解、保護者対応の初期整理</li><li>事故、けが、ヒヤリハット、安全管理の初動整理</li><li>教育課程、年間計画、行事、週時程、時数の調整</li><li>校内研究、研究主任、研究係、たい焼き型研究の進め方</li><li>会議資料、共有メモ、保護者連絡文、事故記録のたたき台</li></ul>
+<p>このGemの特徴は、すぐに施策や計画表を作るのではなく、先に「何を決めれば前に進むか」を整理することです。</p>
+<p>そのため、学校運営で起きやすい次のような失敗を減らせます。</p>
+<ul><li>困り感を、そのまま解決策にしてしまう</li><li>人物評価や印象で話が進んでしまう</li><li>MustとOptionが混ざり、何を動かせるのか分からなくなる</li><li>すぐ行動リストを増やし、職員の負担がさらに増える</li><li>安全や生徒指導上のリスクを、通常相談として扱ってしまう</li><li>会議で何を決めるのかが曖昧なまま進む</li></ul>
+<h2 id="section-9">2. はじめに知っておくこと</h2>
+<p>このGemでは、利用者が「生徒指導Mを使って」「教務運営Mを使って」のように指定する必要はありません。</p>
+<p>ふつうに、相談したいことをそのまま入れれば大丈夫です。</p>
+<p>例：</p>
+<pre><code>学年会で決めた取り組みが、なかなか校内で共有されません。
+どこが詰まっているのか整理してください。</code></pre>
+<pre><code>事故後の保護者連絡文を作る前に、事実・対応・未確認事項を分けてください。</code></pre>
+<p>Gemの中では、入口役のベースが相談内容を見て、必要な知識を参照します。</p>
+<p>利用者が意識するのは、「何を相談したいか」「何に困っているか」「分かっている事実は何か」だけで十分です。</p>
+<h2 id="section-10">3. 基本の使い方</h2>
+<h3 id="section-11">まずは、相談をそのまま書く</h3>
+<p>最初から整理された相談文を書く必要はありません。</p>
+<p>特に初心者のうちは、次の一文を入れるのがおすすめです。</p>
+<pre><code>うまく整理できていないかもしれません。
+事実・困り感・不明点を分け、学校として何を決めれば前に進むかを整理してください。</code></pre>
+<p>この一文を入れておくと、Gemがいきなり解決策を出すのではなく、相談をほどくところから始めやすくなります。</p>
+<h3 id="section-12">入れるとよい情報</h3>
+<div class="table-wrap"><table><thead><tr><th>入れるとよい情報</th><th>例</th></tr></thead><tbody><tr><td>何の相談か</td><td>学年運営、生徒指導、安全管理、教務、研究</td></tr><tr><td>いま起きていること</td><td>いつ、どこで、誰に関係することか</td></tr><tr><td>困っていること</td><td>負担、迷い、共有不足、判断の曖昧さ</td></tr><tr><td>すでに決まっていること</td><td>日程、担当、会議、管理職確認の有無</td></tr><tr><td>不明なこと</td><td>事実関係、制度、関係者の意向、期限</td></tr></tbody></table></div>
+<h3 id="section-13">入力例</h3>
+<pre><code>学校マネジメントの相談です。
+
+相談：
+校内研究の共有タイムが、毎回報告会のようになってしまいます。
+
+困っていること：
+先生方が自分の授業の問いや子どもの姿を話す時間にならず、研究主任の準備負担も増えています。
+
+お願い：
+たい焼き型研究の考え方に沿って、共有タイムを軽くする方向を整理してください。</code></pre>
+<h3 id="section-14">出力後にやること</h3>
+<p>出てきた整理や案は、そのまま学校の決定にする前に、次を確認します。</p>
+<ul><li>事実と見立てが混ざっていないか</li><li>学校の実際のルール、自治体ルール、管理職判断と合っているか</li><li>安全や生徒指導上のリスクが過小評価されていないか</li><li>担当者や一部職員に負担が集中していないか</li><li>個人情報や内部事情を出しすぎていないか</li><li>次に決める場が明確か</li></ul>
+<h2 id="section-15">4. 相談の進み方</h2>
+<p>このGemは、相談をおおむね次の流れで扱います。</p>
+<p>利用者がこの流れを暗記する必要はありません。出力を読むときの見取り図として使ってください。</p>
+<div class="table-wrap"><table><thead><tr><th>流れ</th><th>何をするか</th></tr></thead><tbody><tr><td>受け止め</td><td>相談内容を短く受け止め、すぐ解決策に飛ばない</td></tr><tr><td>切り分け</td><td>事実、願い、困り感、解釈、不明を分ける</td></tr><tr><td>Issue固定</td><td>学校として何を決めれば前に進むかを1文に近づける</td></tr><tr><td>視座補正</td><td>必要に応じて、学年、分掌、会議、教育課程、学校文化へ接続する</td></tr><tr><td>方向性整理</td><td>MustとOption、負担とリスク、停止・統合・代替を見る</td></tr><tr><td>実行化</td><td>誰が、どの場で、何を決め、どう確認するかへ落とす</td></tr><tr><td>成果物化</td><td>必要な場合だけ、共有メモや文書に整える</td></tr></tbody></table></div>
+<p>ポイントは、最初からHowを増やさないことです。</p>
+<p>「どうするか」の前に、「何を決めるか」を見つけると、会議や相談が短くなります。</p>
+<h2 id="section-16">5. Issueとは何か</h2>
+<p>このGemでよく出てくる <code>Issue</code> は、単なる問題点ではありません。</p>
+<p>ここでは、「意思決定を変える一点」という意味で使います。</p>
+<h3 id="section-17">Issueになりにくいもの</h3>
+<ul><li>先生方の意識が低い</li><li>保護者対応が大変</li><li>行事が多すぎる</li><li>研究がうまく進まない</li><li>子どもが落ち着かない</li></ul>
+<p>これらは困り感として大切ですが、そのままでは何を決めるかが見えにくい状態です。</p>
+<h3 id="section-18">Issueに近づけた例</h3>
+<div class="table-wrap"><table><thead><tr><th>困り感</th><th>Issue案</th></tr></thead><tbody><tr><td>学年会が機能していない</td><td>学年会で決めることと職員会議に上げることを分けるか</td></tr><tr><td>行事が多くて大変</td><td>今年度中に停止・統合できる行事や会議をどこまで決めるか</td></tr><tr><td>研究が報告会になっている</td><td>共有タイムを成果報告から子どもの姿を語る場へ戻すか</td></tr><tr><td>保護者対応がばらつく</td><td>事実・学校対応・今後の確認を共通の型で伝えるか</td></tr></tbody></table></div>
+<p>Issueが見えると、「次の会議で何を決めるか」「誰と共有するか」「どこまでを今決めるか」が見えます。</p>
+<h2 id="section-19">6. 学校づくり・校内体制の相談</h2>
+<p>学年、分掌、会議、職員間の情報共有などの相談では、個人の性格や能力ではなく、構造として見ます。</p>
+<h3 id="section-20">使える相談例</h3>
+<pre><code>校内体制の相談です。
+
+状況：
+複数の分掌から同じ時期に依頼が出て、担任の負担が重なっています。
+
+困っていること：
+どの依頼が優先なのか分からず、締切前に混乱します。
+
+お願い：
+人を責める形ではなく、情報動線と会議の持ち方として整理してください。</code></pre>
+<h3 id="section-21">出してもらうとよいもの</h3>
+<ul><li>いま詰まっている場所</li><li>MustとOption</li><li>止める、まとめる、置き換える候補</li><li>どの会議で何を決めるか</li><li>共有先と確認日</li></ul>
+<h3 id="section-22">注意</h3>
+<p>「もっと頑張る」「意識を高める」だけでは、学校の動きは変わりにくいです。</p>
+<p>このGemには、役割、情報の流れ、会議の決め方、職員負担として整理してもらうのがおすすめです。</p>
+<h2 id="section-23">7. 生徒指導・児童理解の相談</h2>
+<p>生徒指導や児童理解では、早く結論を出すより、安全と事実確認を優先します。</p>
+<p>このGemは、子どもを評価・断罪するためではなく、事実、不明、リスク、次の確認を分けるために使います。</p>
+<h3 id="section-24">使える相談例</h3>
+<pre><code>児童理解の相談です。
+
+状況：
+授業中に離席する児童がいます。注意すると強く反発することがあります。
+
+分かっていること：
+- 離席は午前中に多いです
+- けがや他害はありません
+- 担任は対応に迷っています
+
+お願い：
+子どもを決めつけず、事実・不明・背景の仮説・チームで確認することを整理してください。</code></pre>
+<h3 id="section-25">出力で見るポイント</h3>
+<ul><li>安全リスクはあるか</li><li>確認できている事実は何か</li><li>子どもの言葉やサインは何か</li><li>見立ては仮説として扱われているか</li><li>担任一人で抱え込む形になっていないか</li><li>記録に残す項目があるか</li></ul>
+<h3 id="section-26">危険が疑われる場合</h3>
+<p>自傷、自殺示唆、虐待疑い、重大ないじめ、性的被害、暴力やけががある場合は、通常の相談整理より安全側の初動を優先します。</p>
+<p>Gemの出力は参考にしつつ、学校の危機対応ルール、管理職、関係機関への相談を優先してください。</p>
+<h2 id="section-27">8. 危機管理・安全管理の相談</h2>
+<p>事故、けが、設備不良、災害、不審者、感染症、校外活動中の危険などでは、まず危険を止めることが最優先です。</p>
+<h3 id="section-28">使える相談例</h3>
+<pre><code>安全管理の相談です。
+
+状況：
+休み時間に遊具付近で児童が転倒しました。
+
+分かっていること：
+- けがの程度は軽いようですが、養護教諭が確認中です
+- 同じ場所でヒヤリハットが数回ありました
+- 保護者連絡と再発防止を整理したいです
+
+お願い：
+事実・未確認事項・初動・記録・再発防止を分けてください。</code></pre>
+<h3 id="section-29">出してもらうとよいもの</h3>
+<ul><li>今すぐすること</li><li>安全確認</li><li>管理職、養護教諭、担任、保護者への共有</li><li>記録に残す項目</li><li>個人の注意だけで終わらない再発防止</li></ul>
+<h3 id="section-30">注意</h3>
+<p>安全管理では、原因や責任を急いで決めないことが大切です。</p>
+<p>まず危険を止め、児童を守り、確認できた事実と未確認情報を分けます。</p>
+<h2 id="section-31">9. 教務運営・年間計画の相談</h2>
+<p>教務運営では、時数だけでなく、教育課程、行事、週時程、会議、職員負担をつなげて考えます。</p>
+<h3 id="section-32">使える相談例</h3>
+<pre><code>教務運営の相談です。
+
+状況：
+短縮日課が続き、学年から授業時数と単元進度への不安が出ています。
+
+お願い：
+教育課程上のMust、学校裁量で動かせるOption、不明・確認事項、調整案を分けてください。</code></pre>
+<h3 id="section-33">出力で見るポイント</h3>
+<ul><li>MustとOptionが分かれているか</li><li>制度や標準時数を根拠なしに断定していないか</li><li>時数だけでなく、学びの流れと職員負担を見ているか</li><li>どの場で何を決めるかが明確か</li><li>停止、統合、代替の案があるか</li></ul>
+<h3 id="section-34">注意</h3>
+<p>制度、標準時数、自治体ルールに関わることは、Gemの出力だけで確定しません。</p>
+<p>必ず学校の資料、教育委員会の通知、管理職判断で確認してください。</p>
+<h2 id="section-35">10. たい焼き型研究マネジメントの相談</h2>
+<p>このGemには、たい焼き型校内研究を支えるための知識も入っています。</p>
+<p>研究をきれいに管理するためではなく、先生方の問い、子どもの姿、共有の場、次の授業改善をつなぐために使います。</p>
+<h3 id="section-36">使える相談例</h3>
+<pre><code>たい焼き型研究の相談です。
+
+状況：
+自己課題が、先生方にとって提出物のようになっています。
+
+願い：
+子どもの姿を見ながら、自分の授業で試したい問いに戻したいです。
+
+お願い：
+自己課題を管理表にせず、子どもの学びと教師の学びへ接続する形に整理してください。</code></pre>
+<h3 id="section-37">相談できること</h3>
+<ul><li>自己課題の立て方や見直し方</li><li>共有タイムの問い、テーマ、グルーピング</li><li>学びタイムを先生方の必要感から組み立てること</li><li>一人一公開を重い研究授業にしない工夫</li><li>ジャーナルを提出物ではなく研究の記憶にすること</li><li>まとめの会を成果発表ではなく学びの語り直しにすること</li><li>CRTや全国学テなどのデータを授業改善へ接続すること</li><li>たい焼き通信や研究係会メモの整理</li></ul>
+<h3 id="section-38">注意</h3>
+<p>このGemは、中心発問、指導案本文、教材研究、子どもの発言分析を代行するためのものではありません。</p>
+<p>迷ったら、研究成果物ではなく、子どもの学び、教師の学び、次の授業改善へ戻します。</p>
+<h2 id="section-39">11. 成果物を作ってもらう</h2>
+<p>相談の整理だけでなく、必要に応じて成果物のたたき台も作れます。</p>
+<p>ただし、このGemは成果物を増やしすぎないことを大切にします。</p>
+<h3 id="section-40">作れるもの</h3>
+<ul><li>会議で共有する短いメモ</li><li>管理職に相談するための論点整理</li><li>学年会や分掌会の議題案</li><li>保護者連絡文のたたき台</li><li>事故記録、ヒヤリハット記録、対応メモ</li><li>生徒指導の共有記録</li><li>研究係会メモ、たい焼き通信のたたき台</li></ul>
+<h3 id="section-41">入力例</h3>
+<pre><code>この相談内容をもとに、管理職に相談するための短いメモを作ってください。
+
+形式：
+1. 相談したいIssue
+2. 確認できている事実
+3. 判断が必要なこと
+4. 提案する次の一手
+5. 不明点
+
+内部事情や個人評価は入れないでください。</code></pre>
+<h3 id="section-42">仕上げの注意</h3>
+<p>成果物化するときも、内容や結論を勝手に変えないことが大切です。</p>
+<p>不明点は推測で埋めず、<code>〔未確認〕</code> や <code>確認事項</code> として残します。</p>
+<h2 id="section-43">12. よく使う頼み方テンプレート</h2>
+<h3 id="section-44">相談をほどいてほしい</h3>
+<pre><code>次の相談を整理してください。
+
+状況：
+
+困っていること：
+
+願い：
+
+分かっている事実：
+
+不明なこと：
+
+お願い：
+事実・願い・困り感・解釈・不明を分け、学校として何を決めれば前に進むかを1文で示してください。</code></pre>
+<h3 id="section-45">Issueを見つけたい</h3>
+<pre><code>この相談のIssue候補を最大3つに絞ってください。
+
+条件：
+- Issueは「何を決めれば前に進むか」の形に近づける
+- WhyやHowを混ぜない
+- 副論点は分ける</code></pre>
+<h3 id="section-46">MustとOptionを分けたい</h3>
+<pre><code>次の内容について、MustとOptionを分けてください。
+
+Must：
+学校として必ず守る必要があること
+
+Option：
+学校裁量で調整できること
+
+不明：
+確認しないと断定できないこと</code></pre>
+<h3 id="section-47">具体プランにしたい</h3>
+<pre><code>この方向性を、学校で実際に動く具体策にしてください。
+
+入れてほしい項目：
+- 何を決めるか
+- どの場で決めるか
+- 担当・相談先・共有先
+- 動かす順序
+- 期限または判断日
+- 何をもって進んだと見るか
+- 負担を増やさない工夫</code></pre>
+<h3 id="section-48">会議メモにしたい</h3>
+<pre><code>この内容を、会議で共有する短いメモにしてください。
+
+入れてほしい項目：
+1. 今日決めたいこと
+2. 確認できている事実
+3. 判断が必要なこと
+4. 決めすぎないこと
+5. 次に共有する相手</code></pre>
+<h2 id="section-49">13. うまくいかないときの直し方</h2>
+<h3 id="section-50">答えが大きすぎる</h3>
+<pre><code>今回は大きな方針ではなく、次の会議で決める一点に絞ってください。</code></pre>
+<h3 id="section-51">施策が増えすぎる</h3>
+<pre><code>追加する案より先に、停止・統合・代替できることを整理してください。</code></pre>
+<h3 id="section-52">人物評価に寄っている</h3>
+<pre><code>人の性格や能力ではなく、役割・情報動線・会議の持ち方として整理し直してください。</code></pre>
+<h3 id="section-53">不明点が多い</h3>
+<pre><code>分かる範囲で仮整理し、不明点は〔未確認〕として残してください。
+質問は最大3つまでにしてください。</code></pre>
+<h3 id="section-54">計画が実行できなさそう</h3>
+<pre><code>この計画が本当に学校で動くか、担当・決定の場・期限・職員負担の観点で点検してください。</code></pre>
+<h3 id="section-55">安全リスクが気になる</h3>
+<pre><code>通常の相談整理ではなく、安全側初動を優先して整理してください。
+今すぐ確認すること、管理職に共有すること、記録に残すことを分けてください。</code></pre>
+<h2 id="section-56">14. 個人情報・センシティブ情報の扱い</h2>
+<p>学校マネジメント相談では、個人情報やセンシティブ情報に注意します。</p>
+<p>Gemに入力する前に、必要に応じて次のように置き換えます。</p>
+<div class="table-wrap"><table><thead><tr><th>入力前</th><th>置き換え例</th></tr></thead><tbody><tr><td>児童の氏名</td><td>Aさん、児童A、ある児童</td></tr><tr><td>保護者名</td><td>保護者、あるご家庭</td></tr><tr><td>教職員名</td><td>担任、学年主任、担当者</td></tr><tr><td>学級名</td><td>該当学級、本学級</td></tr><tr><td>住所、電話番号</td><td>入力しない</td></tr><tr><td>成績、健康、家庭状況</td><td>必要最小限にし、一般化する</td></tr></tbody></table></div>
+<p>いじめ、不登校、虐待疑い、自傷、自殺示唆、性的事案、事故、けがなどは、特に共有範囲に注意します。</p>
+<p>Gemに入れる情報は、相談整理に必要な最小限にします。</p>
+<h2 id="section-57">15. 仕上げ前チェックリスト</h2>
+<p>出力を学校内で共有したり、文書として使ったりする前に、次を確認します。</p>
+<ul><li>事実、解釈、仮説、不明が分かれている</li><li>Issueが1文で示されている</li><li>MustとOptionが分かれている</li><li>安全や生徒指導上のリスクを軽く扱っていない</li><li>制度、時数、報告義務、自治体ルールを根拠なしに断定していない</li><li>人物評価や断罪語になっていない</li><li>個人情報や内部事情を出しすぎていない</li><li>担当、相談先、共有先が明確</li><li>どの会議や場で何を決めるかが明確</li><li>職員負担を増やすだけの案になっていない</li><li>停止、統合、代替が検討されている</li><li>最終判断が必要な内容は管理職や関係者に確認する</li></ul>
+<h2 id="section-58">16. 慣れてきた人向けの裏技</h2>
+<h3 id="section-59">裏技1 先に「Issueだけ」出してもらう</h3>
+<pre><code>解決策はまだ出さず、Issue候補だけ最大3つにしてください。
+その後、どれを主Issueにするか選びます。</code></pre>
+<h3 id="section-60">裏技2 「決めること」と「決めないこと」を分ける</h3>
+<pre><code>次の会議で決めることと、今回は決めないことを分けてください。
+決めないことにも理由を添えてください。</code></pre>
+<h3 id="section-61">裏技3 A/B/C案で比べる</h3>
+<pre><code>このIssueについて、次の3案で整理してください。
+
+A：追加負担を最小にする案
+B：仕組みとして整える案
+C：学校文化として育てる案
+
+各案について、増えること・減ること・リスクを示してください。</code></pre>
+<h3 id="section-62">裏技4 管理職相談用に圧縮する</h3>
+<pre><code>管理職に3分で相談できる形に圧縮してください。
+
+構成：
+- Issue
+- 判断が必要なこと
+- こちらの仮案
+- 確認したいこと</code></pre>
+<h3 id="section-63">裏技5 研究相談を軽くする</h3>
+<pre><code>たい焼き型研究の相談として、研究主任・研究係の仕事を増やさない方向で整理してください。
+追加する前に、今ある時間・資料・ジャーナル・共有タイムを生かす案を出してください。</code></pre>
+<h3 id="section-64">裏技6 保護者連絡文の前に整理する</h3>
+<pre><code>保護者連絡文を作る前に、次を分けてください。
+
+- 確認できた事実
+- 学校がすでに行った対応
+- まだ確認中のこと
+- 保護者にお願いすること
+- 伝えない方がよい内部事情</code></pre>
+<h3 id="section-65">裏技7 最後に「厳しめ点検」をする</h3>
+<pre><code>この整理を、学校内で共有する前に厳しめに点検してください。
+
+観点：
+- 事実と仮説の混同
+- 個人情報
+- 人物評価
+- 安全リスク
+- 実行できない計画
+- 職員負担の増加
+- 決定の場の曖昧さ</code></pre>
+<h2 id="section-66">17. 秘技：カスタム版「学校マネジメント相談室」を作る</h2>
+<p>ここからは、管理者や慣れてきた人向けの使い方です。</p>
+<p>Gem「学校マネジメント相談室」は、Knowledgeに入れるファイルを加えたり、外したり、学校の実情に合わせた資料を追加したりすることで、自校版に育てられます。</p>
+<h3 id="section-67">基本セット</h3>
+<p>まずは、次のファイルをKnowledgeに入れるのがおすすめです。</p>
+<div class="table-wrap"><table><thead><tr><th>ファイル</th><th>役割</th></tr></thead><tbody><tr><td>学校マネジメント相談室ベース</td><td>相談室全体の入口、Issue固定、出力ルール</td></tr><tr><td>対話発想M</td><td>相談をほどき、事実・願い・困り感・不明を分ける</td></tr><tr><td>学校づくりデザインM</td><td>Issueを学校として選べる方向性にする</td></tr><tr><td>具体プランニングM</td><td>方向性を担当・期限・決定の場へ落とす</td></tr><tr><td>生徒指導M</td><td>子どもの安全と尊厳を守る対応へ整理する</td></tr><tr><td>危機管理・安全管理M</td><td>事故、けが、安全上の危機の初動と記録</td></tr><tr><td>教務運営M</td><td>教育課程、年間計画、時数、行事、職員負担の整理</td></tr><tr><td>たい焼き型研究マネジメントM</td><td>たい焼き型校内研究の接続と軽量運営</td></tr></tbody></table></div>
+<h3 id="section-68">加えると便利なKnowledge</h3>
+<p>追加すると効果が出やすいのは、次のような資料です。</p>
+<ul><li>学校の年間計画</li><li>校務分掌表</li><li>会議体の一覧</li><li>危機管理マニュアル</li><li>生徒指導・いじめ対応の校内フロー</li><li>保護者連絡の文例</li><li>事故記録、ヒヤリハット記録の様式</li><li>校内研究の年間計画</li><li>たい焼きタイム、ジャーナル、研究通信の見本</li><li>管理職確認前のチェックリスト</li></ul>
+<p>ただし、児童名、保護者名、教職員名、成績、健康情報、家庭状況、住所、電話番号などの個人情報は入れません。</p>
+<h3 id="section-69">用途別のカスタム例</h3>
+<h4 id="section-70">1. 管理職・主任向け相談強化版</h4>
+<p>向いている人：</p>
+<ul><li>管理職、教務主任、研究主任、学年主任、分掌主任</li><li>会議や校内体制の相談が多い</li><li>判断の論点を短く整理したい</li></ul>
+<p>Knowledgeに入れるもの：</p>
+<ul><li>学校マネジメント相談室ベース</li><li>対話発想M</li><li>学校づくりデザインM</li><li>具体プランニングM</li><li>教務運営M</li><li>校務分掌表、会議体一覧</li></ul>
+<h4 id="section-71">2. 生徒指導・安全管理強化版</h4>
+<p>向いている人：</p>
+<ul><li>生徒指導、生活指導、安全担当、養護教諭との連携が多い</li><li>事実整理、記録、保護者連絡を安全に行いたい</li><li>担任一人で抱え込まない動線を作りたい</li></ul>
+<p>Knowledgeに入れるもの：</p>
+<ul><li>学校マネジメント相談室ベース</li><li>生徒指導M</li><li>危機管理・安全管理M</li><li>記録様式</li><li>校内対応フロー</li></ul>
+<h4 id="section-72">3. 教務運営強化版</h4>
+<p>向いている人：</p>
+<ul><li>年間計画、週時程、行事、時数、会議の調整が多い</li><li>MustとOptionを分けたい</li><li>職員負担を見ながら学校全体を動かしたい</li></ul>
+<p>Knowledgeに入れるもの：</p>
+<ul><li>学校マネジメント相談室ベース</li><li>教務運営M</li><li>具体プランニングM</li><li>年間計画</li><li>週時程、行事予定、会議予定</li></ul>
+<h4 id="section-73">4. たい焼き型研究強化版</h4>
+<p>向いている人：</p>
+<ul><li>研究主任、研究係</li><li>たい焼き型校内研究を軽く回したい</li><li>共有タイム、学びタイム、一人一公開、ジャーナルをつなげたい</li></ul>
+<p>Knowledgeに入れるもの：</p>
+<ul><li>学校マネジメント相談室ベース</li><li>たい焼き型研究マネジメントM</li><li>具体プランニングM</li><li>校内研究年間計画</li><li>たい焼き通信やジャーナルの見本</li></ul>
+<h3 id="section-74">カスタム版を作るときの注意</h3>
+<ul><li>個人情報をKnowledgeに入れない</li><li>古い校内ルールや古い日程を入れっぱなしにしない</li><li>何でも相談できるGemにしようとして、目的を広げすぎない</li><li>安全、制度、時数、報告義務はGemだけで確定しない</li><li>学校としての正式判断をGemに決めさせない</li><li>追加資料を入れすぎて、何の相談室か分からない状態にしない</li></ul>
+<h3 id="section-75">秘技のまとめ</h3>
+<p>カスタム版「学校マネジメント相談室」を作るコツは、次の一言です。</p>
+<pre><code>入口は一つ、Knowledgeは用途に合わせて絞る。</code></pre>
+<p>まずは基本セットで使ってみて、よく相談する内容が見えてきたら、生徒指導版、教務運営版、たい焼き型研究版のように分けて育てるのがおすすめです。</p>
+    </main>
+  </div>
+</body>
+</html>
